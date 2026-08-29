@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LeadFactory — автоматизация лидогенерации и квалификации</title>
+<title>RomanovaLeads — автоматизация лидогенерации и квалификации</title>
 <style>
   html, body {
     margin: 0;
@@ -25,9 +25,17 @@
 </head>
 <body>
   <iframe
-    src="https://script.google.com/macros/s/AKfycbz2Oqd8BMhLKn28AVw3VjXJLNgRMc0FyMuZAiRa3hcugXL0hGeffBP3-JGX3ShymKAN/exec"
-    title="LeadFactory — автоматизация лидогенерации"
+    id="siteFrame"
+    title="RomanovaLeads — автоматизация лидогенерации"
     allow="clipboard-write"
   ></iframe>
+  <script>
+    // Базовый адрес Apps Script — если пересоздадите развёртывание, обновите эту строку
+    var BASE_URL = 'https://script.google.com/macros/s/AKfycbz2Oqd8BMhLKn28AVw3VjXJLNgRMc0FyMuZAiRa3hcugXL0hGeffBP3-JGX3ShymKAN/exec';
+    // Переносим якорь из адреса обёртки (например, factory-lead.ru/#calculator)
+    // внутрь настоящего адреса сайта, иначе якорь никуда не долетит
+    var hash = window.location.hash || '';
+    document.getElementById('siteFrame').src = BASE_URL + hash;
+  </script>
 </body>
 </html>

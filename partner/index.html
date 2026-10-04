@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Кабинет партнера — RomanovaLeads</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #EEF1EC; /* цвет фона кабинета, чтобы не мелькал белый экран */
+  }
+  iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <iframe
+    id="cabinetFrame"
+    title="Кабинет партнера"
+    allow="clipboard-write"
+  ></iframe>
+  <script>
+    // Адрес веб-приложения CRM (проект с кабинетом партнера, НЕ проект сайта).
+    // Если пересоздадите развертывание, обновите эту строку.
+    var CRM_URL = 'https://script.google.com/macros/s/AKfycbxbZt-LhXdfrPsNOQW1F6OUpozCk2LkPKF4D2ou7n85dcnQ95AwNp3DaY10iqHjPNXb/exec';
+
+    // Берем ?key= из адреса обертки и передаем в адрес iframe:
+    // сам Apps Script адрес родительской страницы прочитать не может.
+    var key = new URLSearchParams(window.location.search).get('key') || '';
+    if (!/^[A-Za-z0-9]{8,64}$/.test(key)) key = '';
+    document.getElementById('cabinetFrame').src =
+      CRM_URL + '?view=partner&key=' + encodeURIComponent(key);
+  </script>
+</body>
+</html>

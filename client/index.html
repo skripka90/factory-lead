@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Кабинет клиента — RomanovaLeads</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #EEF1EC; /* цвет фона кабинета, чтобы не мелькал белый экран */
+  }
+  iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <iframe
+    id="cabinetFrame"
+    title="Кабинет клиента"
+    allow="clipboard-write"
+  ></iframe>
+  <script>
+    // Адрес веб-приложения «Статистики» (проект с кабинетом клиента, НЕ проект CRM и НЕ сайт).
+    // Если пересоздадите развертывание, обновите эту строку.
+    var STATS_URL = 'https://script.google.com/macros/s/AKfycbxH61fgMvgfbfWyhpf9h5UsaRprtA3_QJ5slAyi0XdqSPvVVH6ox6Rfx683DO2ExfWF/exec';
+
+    // Берём ?key= из адреса обёртки и передаём в адрес iframe:
+    // сам Apps Script адрес родительской страницы прочитать не может.
+    var key = new URLSearchParams(window.location.search).get('key') || '';
+    if (!/^[A-Za-z0-9]{8,64}$/.test(key)) key = '';
+    document.getElementById('cabinetFrame').src = STATS_URL + '?key=' + encodeURIComponent(key);
+  </script>
+</body>
+</html>

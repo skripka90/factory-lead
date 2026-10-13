@@ -38,8 +38,9 @@
     var BASE_URL = 'https://script.google.com/macros/s/AKfycbz2Oqd8BMhLKn28AVw3VjXJLNgRMc0FyMuZAiRa3hcugXL0hGeffBP3-JGX3ShymKAN/exec';
     // Переносим якорь из адреса обёртки (например, factory-lead.ru/leadgen/#calculator)
     // внутрь настоящего адреса сайта, иначе якорь никуда не долетит
-    var hash = window.location.hash || '';
-    document.getElementById('siteFrame').src = BASE_URL + hash;
+    // (Apps Script не передаёт #якорь внутрь рамки, поэтому отправляем его параметром ?anchor=)
+    var hash = (window.location.hash || '').replace('#', '');
+    document.getElementById('siteFrame').src = BASE_URL + (hash ? '?anchor=' + encodeURIComponent(hash) : '');
   </script>
 </body>
 </html>

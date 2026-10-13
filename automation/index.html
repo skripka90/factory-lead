@@ -339,11 +339,11 @@
   .form-card{background:#fff;border-radius:20px;padding:30px;box-shadow:0 30px 50px -28px rgba(0,0,0,.45);}
   .field{margin-bottom:18px;}
   .field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;}
-  .field input,.field textarea{
+  .field input,.field textarea,.field select{
     width:100%;background:var(--paper-alt);border:1px solid var(--line);color:var(--ink);
     padding:13px 15px;font-size:15px;border-radius:11px;font-family:'Inter',sans-serif;transition:border-color .15s,background .15s;
   }
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(31,168,147,.18);}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(31,168,147,.18);}
   .field textarea{min-height:100px;resize:vertical;}
   .field input::placeholder,.field textarea::placeholder{color:#9AA0AE;}
   .consent{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.45;cursor:pointer;margin:2px 0 18px;}
@@ -793,7 +793,15 @@
           <input id="f-name" name="name" type="text" placeholder="Как к вам обращаться" required>
         </div>
         <div class="field">
-          <label for="f-contact">Telegram или телефон</label>
+          <label for="f-method">Как вам удобнее общаться</label>
+          <select id="f-method" name="method">
+            <option value="Telegram">Telegram</option>
+            <option value="MAX">MAX</option>
+            <option value="Звонок">Только звонок</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-contact" id="f-contact-label">Телефон или @username</label>
           <input id="f-contact" name="contact" type="text" placeholder="@username или номер" required>
         </div>
         <div class="field">
@@ -830,13 +838,33 @@
 
   const form = document.getElementById('leadForm');
   const status = document.getElementById('formStatus');
+  const methodSel = document.getElementById('f-method');
+
+  // Подпись поля контакта зависит от выбранного способа связи
+  function syncMethod(){
+    const label = document.getElementById('f-contact-label');
+    const input = document.getElementById('f-contact');
+    if (methodSel.value === 'Telegram') {
+      label.textContent = 'Телефон или @username';
+      input.placeholder = '@username или номер';
+    } else {
+      label.textContent = methodSel.value === 'MAX' ? 'Телефон (номер в MAX)' : 'Телефон';
+      input.placeholder = '+7 999 000-00-00';
+    }
+  }
+  methodSel.addEventListener('change', syncMethod);
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    if (methodSel.value !== 'Telegram' && form.contact.value.replace(/\D/g, '').length < 7) {
+      status.textContent = 'Укажите номер телефона: нужно не меньше 7 цифр.';
+      return;
+    }
     status.textContent = 'Отправляем…';
 
     const data = {
       name: form.name.value,
+      method: methodSel.value,
       contact: form.contact.value,
       task: form.task.value,
       source: 'automation',
@@ -852,6 +880,7 @@
     .then(function(){
       status.textContent = 'Заявка отправлена. Вернёмся в течение рабочего дня.';
       form.reset();
+      syncMethod();
     })
     .catch(function(){
       status.textContent = 'Не получилось отправить — напишите нам в Telegram напрямую.';

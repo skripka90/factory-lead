@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- ЭТО ФАЙЛ: leadgen/index.html — создать НОВЫЙ файл -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RomanovaLeads — автоматизация лидогенерации и квалификации</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #12163B; /* цвет фона на время загрузки, чтобы не мелькал белый экран */
+  }
+  iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+</style>
+   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+   <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <iframe
+    id="siteFrame"
+    title="RomanovaLeads — автоматизация лидогенерации"
+    allow="clipboard-write"
+  ></iframe>
+  <script>
+    // Базовый адрес Apps Script — если пересоздадите развёртывание, обновите эту строку
+    var BASE_URL = 'https://script.google.com/macros/s/AKfycbz2Oqd8BMhLKn28AVw3VjXJLNgRMc0FyMuZAiRa3hcugXL0hGeffBP3-JGX3ShymKAN/exec';
+    // Переносим якорь из адреса обёртки (например, factory-lead.ru/leadgen/#calculator)
+    // внутрь настоящего адреса сайта, иначе якорь никуда не долетит
+    var hash = window.location.hash || '';
+    document.getElementById('siteFrame').src = BASE_URL + hash;
+  </script>
+</body>
+</html>

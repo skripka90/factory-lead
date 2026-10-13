@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- ЭТО ФАЙЛ: automation/index.html — обновить существующий -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FFFFFF">
@@ -46,7 +47,7 @@
     --head:'Manrope','Inter',system-ui,sans-serif;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;scroll-padding-top:76px;}
+  html{scroll-behavior:smooth;scroll-padding-top:130px;}
   body{
     margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--body);
     background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;
@@ -57,17 +58,25 @@
   svg{display:block;}
   .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
 
-  /* переключатель услуг */
-  .svc-switch{background:#1C2159;}
-  .svc-switch .wrap{display:flex;gap:6px;}
-  .svc-switch a{display:inline-flex;align-items:center;padding:11px 16px 10px;font-size:13px;font-weight:600;color:#9BA0CC;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s;}
-  .svc-switch a:hover{color:#fff;}
-  .svc-switch a[aria-current="page"]{color:#fff;border-bottom-color:var(--accent);}
-  @media (max-width:560px){.svc-switch .wrap{gap:0;padding:0 8px;justify-content:center;}.svc-switch a{padding:11px 12px 10px;font-size:12.5px;}}
+  /* переключатель услуг — закреплён в шапке */
+  .svc-switch{position:sticky;top:0;z-index:45;height:52px;background:#1C2159;}
+  .svc-switch .wrap{display:flex;align-items:center;gap:10px;height:100%;}
+  .svc-label{font-size:13px;font-weight:500;color:#9BA0CC;margin-right:6px;white-space:nowrap;}
+  .svc-switch a{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 18px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;color:#12163B;background:#fff;border:1px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:background .15s,transform .15s;}
+  .svc-switch a:hover{background:#DCF3EE;transform:translateY(-1px);}
+  .svc-switch a::after{content:"→";font-weight:700;color:#1E9683;}
+  .svc-switch a[aria-current="page"]{background:#2BB6A3;border-color:#2BB6A3;color:#12163B;cursor:default;box-shadow:none;transform:none;}
+  .svc-switch a[aria-current="page"]::after{display:none;}
+  @media (max-width:560px){
+    .svc-switch{height:48px;}
+    .svc-label{display:none;}
+    .svc-switch .wrap{gap:8px;padding:0 12px;}
+    .svc-switch a{flex:1;justify-content:center;height:34px;padding:0 8px;font-size:12.5px;gap:5px;}
+  }
 
   /* ---------- header ---------- */
   header{
-    position:sticky;top:0;z-index:40;
+    position:sticky;top:52px;z-index:40;
     background:rgba(255,255,255,.82);
     -webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);
     border-bottom:1px solid rgba(227,230,238,.8);
@@ -369,6 +378,8 @@
     section{padding:76px 0;}
     .hero{padding:60px 0 68px;}
     .navlinks{display:none;}
+    header{position:static;}
+    html{scroll-padding-top:64px;}
     .pain-grid{grid-template-columns:1fr;}
     .pain-grid::after{display:none;}
     .cap-list{grid-template-columns:1fr;}
@@ -434,8 +445,9 @@
 
 <div class="svc-switch">
   <div class="wrap">
-    <a href="https://factory-lead.ru/">Лидогенерация</a>
-    <a href="https://factory-lead.ru/automation/" aria-current="page">Автоматизация процессов</a>
+    <span class="svc-label">Что вас интересует?</span>
+    <a href="https://factory-lead.ru/leadgen/">Привлечь клиентов</a>
+    <a href="https://factory-lead.ru/automation/" aria-current="page">Избавиться от рутины</a>
   </div>
 </div>
 

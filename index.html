@@ -1,44 +1,138 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- ЭТО ФАЙЛ: index.html в КОРНЕ репозитория — заменить (делать последним) -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RomanovaLeads — автоматизация лидогенерации и квалификации</title>
+<title>RomanovaLeads — привлечение клиентов и автоматизация рутины</title>
+<meta name="description" content="RomanovaLeads: автоматизация лидогенерации и квалификации, а также автоматизация рутинных процессов. Выберите направление.">
+<script>
+  // Старые ссылки вида factory-lead.ru/#calculator продолжают работать:
+  // всё, что с якорем, уходит в раздел лидогенерации.
+  if (location.hash && location.hash.length > 1) { location.replace('/leadgen/' + location.hash); }
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112035523', 'ym');
+    ym(112035523, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112035523" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background: #12163B; /* цвет фона на время загрузки, чтобы не мелькал белый экран */
+  :root{
+    --ink:#12163B; --body:#525866; --muted:#6B7385; --line:#E3E6EE;
+    --accent:#1FA893; --accent-dark:#146B5E; --accent-deep:#0E5A4E; --accent-soft:#DCF3EE; --accent-faint:#EEF9F6;
+    --head:'Manrope','Inter',system-ui,sans-serif;
   }
-  iframe {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    min-height:100vh;display:flex;flex-direction:column;
+    font-family:'Inter',system-ui,sans-serif;color:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(760px 380px at 90% -6%,rgba(31,168,147,.2),transparent 62%),
+      radial-gradient(620px 340px at -4% 10%,rgba(220,243,238,.95),transparent 62%),
+      #fff;
   }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(18,22,59,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(18,22,59,.045) 1px,transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 35%,#000 10%,transparent 75%);
+    mask-image:radial-gradient(ellipse 70% 60% at 50% 35%,#000 10%,transparent 75%);
+  }
+  .wrap{position:relative;max-width:1120px;margin:0 auto;padding:0 28px;width:100%;}
+  .ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  header .wrap{display:flex;align-items:center;height:76px;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:19px;letter-spacing:-0.02em;color:var(--ink);text-decoration:none;}
+  .logo-mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 10px -3px rgba(20,107,94,.5);}
+  .logo-mark .ico{width:17px;height:17px;stroke-width:2.2;}
+  .logo i{color:var(--accent);font-style:normal;}
+  main{flex:1;display:flex;align-items:center;padding:36px 0 72px;position:relative;}
+  .intro{text-align:center;max-width:700px;margin:0 auto 48px;}
+  h1{font-family:var(--head);font-weight:800;font-size:clamp(34px,5vw,54px);line-height:1.1;letter-spacing:-0.03em;color:var(--ink);margin:0;}
+  .intro p{font-size:18px;color:var(--body);margin:18px 0 0;}
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto;}
+  .choice{
+    display:flex;flex-direction:column;align-items:flex-start;gap:0;
+    padding:36px 34px 32px;background:#fff;border:1px solid var(--line);border-radius:24px;text-decoration:none;
+    box-shadow:0 1px 2px rgba(18,22,59,.04),0 18px 40px -22px rgba(18,22,59,.25);
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .choice:hover{transform:translateY(-5px);border-color:rgba(31,168,147,.55);box-shadow:0 2px 4px rgba(18,22,59,.04),0 28px 50px -22px rgba(20,107,94,.4);}
+  .c-ico{width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:26px;box-shadow:0 12px 24px -12px rgba(20,107,94,.7);}
+  .c-ico .ico{width:28px;height:28px;stroke-width:1.6;}
+  .choice h2{font-family:var(--head);font-weight:800;font-size:28px;line-height:1.15;letter-spacing:-0.02em;color:var(--ink);margin:0 0 12px;}
+  .choice p{font-size:15.5px;color:var(--body);margin:0 0 32px;flex:1;}
+  .c-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;background:var(--accent-dark);color:#fff;font-weight:600;font-size:15px;box-shadow:0 1px 2px rgba(14,90,78,.3),0 10px 20px -8px rgba(20,107,94,.55);transition:background .15s;}
+  .c-btn .ico{width:18px;height:18px;stroke-width:2;transition:transform .2s;}
+  .choice:hover .c-btn{background:var(--accent-deep);}
+  .choice:hover .c-btn .ico{transform:translateX(4px);}
+  .choice:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
+  .hint{text-align:center;font-size:14px;color:var(--muted);margin-top:28px;}
+  footer{background:#1C2159;color:#9BA0CC;padding:32px 0;font-size:13px;text-align:center;}
+  footer b{color:#fff;}
+  @media (max-width:760px){
+    .choices{grid-template-columns:1fr;gap:16px;}
+    .choice{padding:28px 24px 26px;}
+    .intro{margin-bottom:32px;}
+    main{padding:12px 0 48px;align-items:flex-start;}
+    .wrap{padding:0 20px;}
+  }
+  @media (prefers-reduced-motion:reduce){.choice,.c-btn .ico{transition:none;}}
 </style>
-   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-   <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
-   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
-  <iframe
-    id="siteFrame"
-    title="RomanovaLeads — автоматизация лидогенерации"
-    allow="clipboard-write"
-  ></iframe>
-  <script>
-    // Базовый адрес Apps Script — если пересоздадите развёртывание, обновите эту строку
-    var BASE_URL = 'https://script.google.com/macros/s/AKfycbz2Oqd8BMhLKn28AVw3VjXJLNgRMc0FyMuZAiRa3hcugXL0hGeffBP3-JGX3ShymKAN/exec';
-    // Переносим якорь из адреса обёртки (например, factory-lead.ru/#calculator)
-    // внутрь настоящего адреса сайта, иначе якорь никуда не долетит
-    var hash = window.location.hash || '';
-    document.getElementById('siteFrame').src = BASE_URL + hash;
-  </script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M9 6h4a2 2 0 0 1 2 2v7"/></symbol>
+    <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M22 3H2l8 9.5V19l4 2v-8.5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <span class="logo"><span class="logo-mark"><svg class="ico"><use href="#i-flow"/></svg></span><span class="notranslate" translate="no">Romanova<i>Leads</i></span></span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="intro">
+      <h1>Что вас интересует?</h1>
+      <p>Выберите направление — откроется нужный раздел. Переключиться на другой можно в любой момент.</p>
+    </div>
+    <div class="choices">
+      <a class="choice" href="/leadgen/">
+        <div class="c-ico"><svg class="ico"><use href="#i-funnel"/></svg></div>
+        <h2>Привлечь клиентов</h2>
+        <p>Автоматизация лидогенерации и квалификации</p>
+        <span class="c-btn">Перейти <svg class="ico"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="choice" href="/automation/">
+        <div class="c-ico"><svg class="ico"><use href="#i-flow"/></svg></div>
+        <h2>Избавиться от рутины</h2>
+        <p>Автоматизация рутинных процессов: убираем однообразную работу сотрудников</p>
+        <span class="c-btn">Перейти <svg class="ico"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <b>RomanovaLeads</b> — автоматизация лидогенерации и квалификации, автоматизация рутинных процессов
+</footer>
 </body>
 </html>

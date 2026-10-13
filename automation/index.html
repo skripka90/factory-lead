@@ -13,10 +13,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
-<!-- Яндекс Метрика: вставьте сюда тот же счётчик, что и на главной (factory-lead.ru).
-     Тогда обе страницы считаются в одной статистике. Пример:
-<script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(НОМЕР_СЧЁТЧИКА,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});</script>
--->
+<!-- Yandex.Metrika counter (тот же счётчик, что на главной) -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112035523', 'ym');
+    ym(112035523, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112035523" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <style>
   :root{
     --ink:#12163B;
@@ -323,13 +331,14 @@
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(31,168,147,.18);}
   .field textarea{min-height:100px;resize:vertical;}
   .field input::placeholder,.field textarea::placeholder{color:#9AA0AE;}
+  .consent{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.45;cursor:pointer;margin:2px 0 18px;}
+  .consent input{margin-top:2px;flex:0 0 auto;width:16px;height:16px;accent-color:var(--accent-dark);cursor:pointer;}
+  .consent a{color:var(--accent-dark);text-decoration:underline;}
   .form-card .btn{width:100%;}
   .form-status{font-size:14px;margin-top:14px;color:var(--accent-dark);font-weight:600;min-height:20px;}
 
-  footer{padding:36px 0 44px;}
-  .foot-row a{color:var(--accent-dark);text-decoration:none;font-weight:500;}
-  .foot-row a:hover{text-decoration:underline;}
-  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:28px;}
+  footer{background:#1C2159;color:#9BA0CC;padding:32px 0;font-size:13px;text-align:center;}
+  footer b{color:#fff;}
 
   /* reveal */
   .js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
@@ -766,6 +775,7 @@
           <label for="f-task">Что нужно автоматизировать</label>
           <textarea id="f-task" name="task" placeholder="Коротко опишите процесс"></textarea>
         </div>
+        <label class="consent"><input type="checkbox" id="f-consent" required><span>Согласен(на) на <a href="https://script.google.com/macros/s/AKfycbz2Oqd8BMhLKn28AVw3VjXJLNgRMc0FyMuZAiRa3hcugXL0hGeffBP3-JGX3ShymKAN/exec?view=privacy" target="_blank" rel="noopener">обработку персональных данных</a></span></label>
         <button type="submit" class="btn">Отправить заявку <svg class="ico"><use href="#i-arrow"/></svg></button>
         <div class="form-status" id="formStatus"></div>
       </form>
@@ -774,11 +784,7 @@
 </section>
 
 <footer>
-  <div class="wrap foot-row">
-    <div>© 2026. ИП [ЗАПОЛНИТЬ ФИО] · ИНН [ЗАПОЛНИТЬ]</div>
-    <div><a href="https://factory-lead.ru/">Автоматизация лидогенерации и квалификации →</a></div>
-    <div>[ЗАПОЛНИТЬ ТЕЛЕФОН] · [ЗАПОЛНИТЬ EMAIL]</div>
-  </div>
+  <b>RomanovaLeads</b> — автоматизация рутинных процессов
 </footer>
 
 <script>

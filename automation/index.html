@@ -57,6 +57,14 @@
   svg{display:block;}
   .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
 
+  /* переключатель услуг */
+  .svc-switch{background:#1C2159;}
+  .svc-switch .wrap{display:flex;gap:6px;}
+  .svc-switch a{display:inline-flex;align-items:center;padding:11px 16px 10px;font-size:13px;font-weight:600;color:#9BA0CC;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s;}
+  .svc-switch a:hover{color:#fff;}
+  .svc-switch a[aria-current="page"]{color:#fff;border-bottom-color:var(--accent);}
+  @media (max-width:560px){.svc-switch .wrap{gap:0;padding:0 8px;justify-content:center;}.svc-switch a{padding:11px 12px 10px;font-size:12.5px;}}
+
   /* ---------- header ---------- */
   header{
     position:sticky;top:0;z-index:40;
@@ -69,8 +77,6 @@
   .logo-mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 10px -3px rgba(20,107,94,.5);}
   .logo-mark .ico{width:16px;height:16px;stroke-width:2.2;}
   .logo-name i{color:var(--accent);font-style:normal;}
-  .logo-tag{margin-left:4px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent-dark);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:0;white-space:nowrap;}
-  @media (max-width:1100px){.logo-tag{display:none;}}
   .navlinks{display:flex;gap:34px;font-size:14.5px;font-weight:500;}
   .navlinks a{white-space:nowrap;text-decoration:none;color:var(--body);transition:color .15s;position:relative;}
   .navlinks a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s;}
@@ -426,9 +432,16 @@
   </defs>
 </svg>
 
+<div class="svc-switch">
+  <div class="wrap">
+    <a href="https://factory-lead.ru/">Лидогенерация</a>
+    <a href="https://factory-lead.ru/automation/" aria-current="page">Автоматизация процессов</a>
+  </div>
+</div>
+
 <header>
   <div class="wrap nav">
-    <a href="https://factory-lead.ru/" class="logo" aria-label="RomanovaLeads — на главную"><span class="logo-mark"><svg class="ico"><use href="#i-flow"/></svg></span><span class="logo-name notranslate" translate="no">Romanova<i>Leads</i></span><span class="logo-tag">Автоматизация процессов</span></a>
+    <a href="https://factory-lead.ru/" class="logo" aria-label="RomanovaLeads — на главную"><span class="logo-mark"><svg class="ico"><use href="#i-flow"/></svg></span><span class="logo-name notranslate" translate="no">Romanova<i>Leads</i></span></a>
     <nav class="navlinks">
       <a href="#services">Что делаем</a>
       <a href="#process">Как работаем</a>
